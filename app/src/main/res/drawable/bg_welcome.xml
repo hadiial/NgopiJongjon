@@ -5,17 +5,17 @@
     android:viewportWidth="360"
     android:viewportHeight="800">
 
-    <!-- Background Dasar Putih Penuh (800) -->
+    <!-- Base background: solid white -->
     <path
         android:fillColor="#FFFFFF"
         android:pathData="M0,0h360v800h-360z" />
 
-    <!-- Area Atas Espresso (0 sampai 480 = 60% tinggi layar) -->
+    <!-- Top section: espresso color -->
     <path
         android:fillColor="#1C0B03"
         android:pathData="M0,0 L360,0 L360,480 C240,530 120,430 0,480 Z" />
 
-    <!-- Garis Aksen Krem Mengikuti Lekukan -->
+    <!-- Accent line: cream color following the curve -->
     <path
         android:fillColor="#00000000"
         android:pathData="M0,480 C120,430 240,530 360,480"

@@ -8,7 +8,7 @@
     android:background="@drawable/bg_welcome"
     tools:context=".WelcomeActivity">
 
-    <!-- Guideline tepat di posisi garis lengkung (60% dari atas layar) -->
+    <!-- Place the guideline along the curve at 60% of the screen height -->
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineCurve"
         android:layout_width="wrap_content"
@@ -56,7 +56,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/guidelineCurve" />
 
-    <!-- Mulai sekarang Button -->
+    <!-- Start Now (Mulai Sekarang) Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnStartNow"
         android:layout_width="0dp"
