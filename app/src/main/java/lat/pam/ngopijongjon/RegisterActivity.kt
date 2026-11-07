@@ -17,9 +17,6 @@ class RegisterActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_register)
 
-        // Agar ikon status bar (jam, baterai) berwarna gelap di atas background putih
-        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
-
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -41,7 +38,7 @@ class RegisterActivity : AppCompatActivity() {
             if (fullname.isEmpty() || username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Mohon untuk lengkapi formulir di atas!", Toast.LENGTH_SHORT).show()
             }
-            // Condition 2:
+            // Condition 2: Successfully registered
             else {
                 Toast.makeText(this, "Daftar berhasil! Silakan masuk untuk melanjutkan", Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, LoginActivity::class.java)
