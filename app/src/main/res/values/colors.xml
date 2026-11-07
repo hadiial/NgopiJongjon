@@ -4,9 +4,10 @@
     <color name="bg_primary">#FFFFFF</color>
     <color name="accent_coffee">#EEC1A0</color>
     <color name="text_primary">#000000</color>
-    <color name="text_secondary">#A9A9A9</color>
+    <color name="text_secondary">#747474</color>
 
     <!-- Additions -->
+    <color name="espresso_dark">#1C0B03</color>
     <color name="surface_card">#FDF8F4</color>
     <color name="btn_dark">#1A1A1A</color>
     <color name="border_light">#E0E0E0</color>

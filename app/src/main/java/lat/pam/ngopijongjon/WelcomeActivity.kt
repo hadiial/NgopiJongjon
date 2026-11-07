@@ -15,10 +15,7 @@ class WelcomeActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_welcome)
 
-        // Memastikan ikon status bar (jam, sinyal, baterai) berwarna hitam di atas BG #FFFFFF
-        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
-
-        // Menyesuaikan padding otomatis dengan system bars (status bar & navigation bar)
+        // Automatically adjust padding based on system bars
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -27,6 +24,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         val btnStartNow: Button = findViewById(R.id.btnStartNow)
 
+        // Set up button click listener
         btnStartNow.setOnClickListener {
             val intent = Intent(this, AuthChoiceActivity::class.java)
             startActivity(intent)
