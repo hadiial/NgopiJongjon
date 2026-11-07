@@ -1,0 +1,41 @@
+<resources>
+    <!-- App Name -->
+    <string name="app_name">NgopiJongjon</string>
+
+    <!-- Welcome / Splash Page -->
+    <string name="placeholder_logo">Logo</string>
+    <string name="slogan_welcome">Seduhan nikmat &amp; camilan hangat buat nemenin waktu santai kamu</string>
+    <string name="btn_start_now">Mulai sekarang</string>
+
+    <!-- Auth Choice Page -->
+    <string name="title_auth_choice">Masuk atau Daftar</string>
+    <string name="auth_desc">Gabung menjadi member untuk dapatkan penawaran menarik dan pengalaman yang lebih baik!</string>
+    <string name="btn_login">Masuk</string>
+    <string name="btn_register">Daftar</string>
+
+    <!-- Login Page -->
+    <string name="title_login">Halo!</string>
+    <string name="login_desc">Masukkan username dan password Anda untuk melanjutkan</string>
+
+    <!-- Register Page -->
+    <string name="title_register">Selamat Datang!</string>
+    <string name="register_desc">Mohon isi formulir berikut untuk bergabung</string>
+
+    <!-- Order Address Page -->
+    <string name="title_address">Alamat</string>
+    <string name="hint_full_name">Nama Lengkap</string>
+    <string name="hint_address">Alamat</string>
+    <string name="hint_address_detail">Patokan atau detail lengkap</string>
+    <string name="btn_order_send">Order dan Kirim</string>
+
+    <!-- Order Success Page -->
+    <string name="status_ok">OK</string>
+    <string name="order_success_msg">Terima kasih sudah memesan\ntunggu aja sebentar kurir kami\nsegera mengantarkan\npesananmu!</string>
+    <string name="btn_oke">Oke</string>
+
+    <!-- Profile Page -->
+    <string name="subtitle_my_profile">Profile Saya</string>
+    <string name="label_profile_setting">Profile Setting</string>
+    <string name="hint_profile_name">nama</string>
+    <string name="btn_save">Save</string>
+</resources>

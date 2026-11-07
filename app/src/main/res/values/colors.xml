@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Main Palette -->
+    <color name="bg_primary">#FFFFFF</color>
+    <color name="accent_coffee">#EEC1A0</color>
+    <color name="text_primary">#000000</color>
+    <color name="text_secondary">#A9A9A9</color>
+
+    <!-- Additions -->
+    <color name="surface_card">#FDF8F4</color>
+    <color name="btn_dark">#1A1A1A</color>
+    <color name="border_light">#E0E0E0</color>
+    <color name="status_success_bg">#A8E6CF</color>
+    <color name="status_success_text">#1E4620</color>
+</resources>
