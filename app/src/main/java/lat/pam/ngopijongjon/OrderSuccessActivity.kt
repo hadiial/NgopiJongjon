@@ -16,7 +16,7 @@ class OrderSuccessActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_order_success)
 
-        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -27,12 +27,12 @@ class OrderSuccessActivity : AppCompatActivity() {
         val tvSuccessGreeting = findViewById<TextView>(R.id.tvSuccessGreeting)
         val btnOke = findViewById<Button>(R.id.btnOke)
 
-        // Tangkap nama pemesan dari OrderAddressActivity
+        // Retrieve the customer's name passed from OrderAddressActivity
         val username = intent.getStringExtra("USERNAME_KEY") ?: getString(R.string.default_username)
         tvSuccessGreeting.text = getString(R.string.greeting_format, username)
 
         btnOke.setOnClickListener {
-            // Kembali ke halaman Home dan bersihkan riwayat halaman order
+            // Return to HomeActivity and clear the order flow back stack
             val intent = Intent(this, HomeActivity::class.java)
             intent.putExtra("USERNAME_KEY", username)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP

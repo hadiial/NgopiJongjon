@@ -17,7 +17,7 @@ class OrderAddressActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_order_address)
 
-        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -30,7 +30,7 @@ class OrderAddressActivity : AppCompatActivity() {
         val etAddressDetail = findViewById<TextInputEditText>(R.id.etAddressDetail)
         val btnOrderSend = findViewById<Button>(R.id.btnOrderSend)
 
-        // Tangkap username dari HomeActivity untuk mengisi otomatis kolom Nama Lengkap (opsional tapi memudahkan user)
+        // Pre-fill the full name field using the username passed from HomeActivity
         val usernameFromHome = intent.getStringExtra("USERNAME_KEY")
         if (!usernameFromHome.isNullOrEmpty()) {
             etFullName.setText(usernameFromHome)
@@ -41,17 +41,17 @@ class OrderAddressActivity : AppCompatActivity() {
             val address = etAddress.text.toString().trim()
             val detail = etAddressDetail.text.toString().trim()
 
-            // Validasi input tidak boleh kosong
+            // Validate that all required address fields are filled
             if (fullName.isEmpty() || address.isEmpty() || detail.isEmpty()) {
                 Toast.makeText(this, getString(R.string.toast_empty_address), Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(this, getString(R.string.toast_order_processed), Toast.LENGTH_SHORT).show()
 
-                // Arahkan ke halaman 8 (OrderSuccessActivity) sambil mengirim nama pemesan
-                // val intent = Intent(this, OrderSuccessActivity::class.java)
-                // intent.putExtra("USERNAME_KEY", fullName)
-                // startActivity(intent)
-                // finish()
+                // Navigate to OrderSuccessActivity and pass the customer's name
+                val intent = Intent(this, OrderSuccessActivity::class.java)
+                intent.putExtra("USERNAME_KEY", fullName)
+                startActivity(intent)
+                finish()
             }
         }
     }
