@@ -23,22 +23,73 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Sub-judul Makanan -->
-    <TextView
-        android:id="@+id/tvSubTitle"
+    <!-- Baris Filter Tab (Semua | Minuman | Makanan) -->
+    <LinearLayout
+        android:id="@+id/llFilterTabs"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="12dp"
-        android:text="Makanan &amp; Minuman"
-        android:textColor="@color/text_primary"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvGreeting" />
+        app:layout_constraintTop_toBottomOf="@+id/tvGreeting">
 
-    <!-- Daftar Menu (RecyclerView) -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTabAll"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/btn_dark"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Semua"
+            android:textAllCaps="false"
+            android:textColor="@color/bg_primary"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:cornerRadius="21dp"
+            app:strokeWidth="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTabDrinks"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginHorizontal="6dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/surface_card"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Minuman"
+            android:textAllCaps="false"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:cornerRadius="21dp"
+            app:strokeColor="@color/border_light"
+            app:strokeWidth="1dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnTabFood"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:backgroundTint="@color/surface_card"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="Makanan"
+            android:textAllCaps="false"
+            android:textColor="@color/text_primary"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            app:cornerRadius="21dp"
+            app:strokeColor="@color/border_light"
+            app:strokeWidth="1dp" />
+    </LinearLayout>
+
+    <!-- Daftar Menu (RecyclerView di bawah Filter Tab) -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMenu"
         android:layout_width="0dp"
@@ -50,10 +101,10 @@
         app:layout_constraintBottom_toTopOf="@+id/llBottomNav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSubTitle"
+        app:layout_constraintTop_toBottomOf="@+id/llFilterTabs"
         tools:listitem="@layout/item_menu" />
 
-    <!-- Baris Navigasi Bawah (Sesuai Wireframe: Home aktif berwarna gelap) -->
+    <!-- Baris Navigasi Bawah -->
     <LinearLayout
         android:id="@+id/llBottomNav"
         android:layout_width="0dp"
@@ -66,7 +117,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!-- Tombol Home (Aktif) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNavHome"
             android:layout_width="0dp"
@@ -80,7 +130,6 @@
             android:textStyle="bold"
             app:cornerRadius="8dp" />
 
-        <!-- Tombol Order -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNavOrder"
             style="@style/Widget.MaterialComponents.Button.TextButton"
@@ -92,7 +141,6 @@
             android:textColor="@color/text_primary"
             android:textSize="14sp" />
 
-        <!-- Tombol Profile -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNavProfile"
             style="@style/Widget.MaterialComponents.Button.TextButton"

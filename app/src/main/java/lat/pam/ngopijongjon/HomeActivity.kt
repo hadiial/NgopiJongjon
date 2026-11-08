@@ -1,17 +1,20 @@
 package lat.pam.ngopijongjon
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,33 +32,82 @@ class HomeActivity : AppCompatActivity() {
 
         val tvGreeting = findViewById<TextView>(R.id.tvGreeting)
         val rvMenu = findViewById<RecyclerView>(R.id.rvMenu)
+        val btnTabAll = findViewById<MaterialButton>(R.id.btnTabAll)
+        val btnTabDrinks = findViewById<MaterialButton>(R.id.btnTabDrinks)
+        val btnTabFood = findViewById<MaterialButton>(R.id.btnTabFood)
         val btnNavOrder = findViewById<Button>(R.id.btnNavOrder)
         val btnNavProfile = findViewById<Button>(R.id.btnNavProfile)
 
-        // 1. Tangkap nama/username dari Login atau Register (jika ada)
+        // 1. Tangkap nama/username dari Login atau Register
         val username = intent.getStringExtra("USERNAME_KEY") ?: "Teman Ngopi"
         tvGreeting.text = "Halo $username,"
 
-        // 2. Siapkan 5 Data Statis (Dummy Data) sesuai Wireframe
-        val dummyMenuList = listOf(
-            MenuItem("Kopi Susu Gula Aren", "Espresso, susu, gula aren", "Rp 22.000"),
-            MenuItem("Donat Cokelat", "Donat empuk, glaze cokelat", "Rp 12.000"),
-            MenuItem("Sourdough Loaf", "Roti fermentasi alami", "Rp 35.000"),
-            MenuItem("Cappuccino", "Espresso, foam susu lembut", "Rp 25.000"),
-            MenuItem("Matcha Latte", "Matcha jepang, susu segar", "Rp 27.000")
+        // 2. Siapkan 10 Data Statis lengkap dengan Kategori & Gambar
+        val allMenuList = listOf(
+            // Kategori Minuman
+            MenuItem("Americano", "Espresso, air panas/dingin", "Rp 20.000", "Minuman", R.drawable.espresso),
+            MenuItem("Kopi Susu Gula Aren", "Espresso, susu, gula aren", "Rp 22.000", "Minuman", R.drawable.kopsu_aren),
+            MenuItem("Cappuccino", "Espresso, foam susu lembut", "Rp 25.000", "Minuman", R.drawable.cappuccino),
+            MenuItem("Matcha Latte", "Matcha jepang, susu segar", "Rp 27.000", "Minuman", R.drawable.matcha),
+            MenuItem("Lemon Tea", "Teh, lemon segar", "Rp 18.000", "Minuman", R.drawable.lemon_tea),
+            MenuItem("Air Mineral", "Air minum kemasan", "Rp 10.000", "Minuman", R.drawable.water),
+
+            // Kategori Makanan
+            MenuItem("Donat Cokelat", "Donat empuk, glaze cokelat", "Rp 12.000", "Makanan", R.drawable.donut),
+            MenuItem("Croissant", "Croissant mentega renyah", "Rp 15.000", "Makanan", R.drawable.croissant),
+            MenuItem("French Fries", "Kentang goreng gurih", "Rp 20.000", "Makanan", R.drawable.fries),
+            MenuItem("Chicken Wings", "Wings empuk, saus BBQ panggang", "Rp 35.000", "Makanan", R.drawable.wings)
         )
 
         // 3. Pasang Adapter ke RecyclerView
-        rvMenu.layoutManager = LinearLayoutManager(this)
-        rvMenu.adapter = MenuAdapter(dummyMenuList) { selectedItem ->
+        val menuAdapter = MenuAdapter(allMenuList) { selectedItem ->
             Toast.makeText(this, "Memilih: ${selectedItem.name}", Toast.LENGTH_SHORT).show()
-            // Opsional: Langsung pindah ke halaman Order saat item diklik
             val intent = Intent(this, OrderAddressActivity::class.java)
             intent.putExtra("USERNAME_KEY", username)
             startActivity(intent)
         }
+        rvMenu.layoutManager = LinearLayoutManager(this)
+        rvMenu.adapter = menuAdapter
 
-        // 4. Navigasi Tombol Bawah
+        // Fungsi pembantu untuk mengubah gaya tombol Tab yang sedang aktif
+        fun setActiveTab(activeBtn: MaterialButton, inactiveBtn1: MaterialButton, inactiveBtn2: MaterialButton) {
+            // Gaya tombol aktif (Hitam solid, teks putih)
+            activeBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.btn_dark))
+            activeBtn.setTextColor(ContextCompat.getColor(this, R.color.bg_primary))
+            activeBtn.strokeWidth = 0
+
+            // Gaya tombol tidak aktif (Krem kartu, teks hitam, border tipis)
+            val inactiveBg = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.surface_card))
+            val inactiveText = ContextCompat.getColor(this, R.color.text_primary)
+            val borderStroke = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.border_light))
+
+            listOf(inactiveBtn1, inactiveBtn2).forEach { btn ->
+                btn.backgroundTintList = inactiveBg
+                btn.setTextColor(inactiveText)
+                btn.strokeColor = borderStroke
+                btn.strokeWidth = 3
+            }
+        }
+
+        // 4. Aksi Klik Filter Tab
+        btnTabAll.setOnClickListener {
+            setActiveTab(btnTabAll, btnTabDrinks, btnTabFood)
+            menuAdapter.updateList(allMenuList)
+        }
+
+        btnTabDrinks.setOnClickListener {
+            setActiveTab(btnTabDrinks, btnTabAll, btnTabFood)
+            val drinksOnly = allMenuList.filter { it.category == "Minuman" }
+            menuAdapter.updateList(drinksOnly)
+        }
+
+        btnTabFood.setOnClickListener {
+            setActiveTab(btnTabFood, btnTabAll, btnTabDrinks)
+            val foodOnly = allMenuList.filter { it.category == "Makanan" }
+            menuAdapter.updateList(foodOnly)
+        }
+
+        // 5. Navigasi Tombol Bawah
         btnNavOrder.setOnClickListener {
             val intent = Intent(this, OrderAddressActivity::class.java)
             intent.putExtra("USERNAME_KEY", username)
