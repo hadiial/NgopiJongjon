@@ -6,6 +6,7 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -18,7 +19,8 @@ class ProfileActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_profile)
 
-        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
+        // Set status bar icons to light mode for the espresso header
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -29,15 +31,16 @@ class ProfileActivity : AppCompatActivity() {
         val tvProfileGreeting = findViewById<TextView>(R.id.tvProfileGreeting)
         val etProfileName = findViewById<TextInputEditText>(R.id.etProfileName)
         val btnSaveProfile = findViewById<Button>(R.id.btnSaveProfile)
+        val btnLogout = findViewById<Button>(R.id.btnLogout)
         val btnNavHome = findViewById<Button>(R.id.btnNavHome)
         val btnNavOrder = findViewById<Button>(R.id.btnNavOrder)
 
-        // Ambil nama saat ini dari Intent
+        // Retrieve the current username from the Intent
         var currentUsername = intent.getStringExtra("USERNAME_KEY") ?: getString(R.string.default_username)
         tvProfileGreeting.text = getString(R.string.greeting_format, currentUsername)
         etProfileName.setText(currentUsername)
 
-        // Aksi tombol Save untuk memperbarui nama statis
+        // Save button action to update static username
         btnSaveProfile.setOnClickListener {
             val newName = etProfileName.text.toString().trim()
             if (newName.isEmpty()) {
@@ -49,15 +52,32 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
 
-        // Navigasi kembali ke Home membawa nama terbaru
+        // Logout button action with confirmation popup
+        btnLogout.setOnClickListener {
+            AlertDialog.Builder(this)
+                .setTitle(getString(R.string.dialog_logout_title))
+                .setMessage(getString(R.string.dialog_logout_message))
+                .setPositiveButton(getString(R.string.dialog_yes)) { _, _ ->
+                    // Return to WelcomeActivity and clear activity stack
+                    val intent = Intent(this, WelcomeActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                    finish()
+                }
+                .setNegativeButton(getString(R.string.dialog_no), null)
+                .show()
+        }
+
+        // Navigate back to Home and pass the latest username
         btnNavHome.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             intent.putExtra("USERNAME_KEY", currentUsername)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
             startActivity(intent)
             finish()
         }
 
-        // Navigasi ke halaman Order membawa nama terbaru
+        // Navigate to Order screen and pass the latest username
         btnNavOrder.setOnClickListener {
             val intent = Intent(this, OrderAddressActivity::class.java)
             intent.putExtra("USERNAME_KEY", currentUsername)
