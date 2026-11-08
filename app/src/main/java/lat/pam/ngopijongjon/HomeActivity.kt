@@ -59,24 +59,21 @@ class HomeActivity : AppCompatActivity() {
             MenuItem("Chicken Wings", "Wings empuk, saus BBQ panggang", "Rp 35.000", "Makanan", R.drawable.wings)
         )
 
-        // Attach the adapter to the RecyclerView
+        // Attach the adapter to the RecyclerView and show a toast message when an item is clicked
         val menuAdapter = MenuAdapter(allMenuList) { selectedItem ->
             Toast.makeText(this, getString(R.string.toast_memilih, selectedItem.name), Toast.LENGTH_SHORT).show()
-            val intent = Intent(this, OrderAddressActivity::class.java)
-            intent.putExtra("USERNAME_KEY", username)
-            startActivity(intent)
         }
         rvMenu.layoutManager = LinearLayoutManager(this)
         rvMenu.adapter = menuAdapter
 
         // Helper function to update the active tab button style
         fun setActiveTab(activeBtn: MaterialButton, inactiveBtn1: MaterialButton, inactiveBtn2: MaterialButton) {
-            // Active tab style (solid black background, white text)
+            // Active tab style (solid dark background, light text)
             activeBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.btn_dark))
             activeBtn.setTextColor(ContextCompat.getColor(this, R.color.bg_primary))
             activeBtn.strokeWidth = 0
 
-            // Inactive tab style (cream background, black text, thin border)
+            // Inactive tab style (card surface background, primary text, thin border)
             val inactiveBg = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.surface_card))
             val inactiveText = ContextCompat.getColor(this, R.color.text_primary)
             val borderStroke = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.border_light))

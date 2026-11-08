@@ -88,7 +88,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvMenuDesc"
             tools:text="Rp 0" />
 
-        <!-- Aksen Ikon '+' Kecil agar terkesan interaktif seperti aplikasi kopi modern -->
+        <!-- Add to cart action badge -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cvAddBadge"
             android:layout_width="32dp"
