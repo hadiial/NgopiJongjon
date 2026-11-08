@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:padding="12dp">
 
-        <!-- Kotak Foto Menu -->
+        <!-- Menu image container -->
         <androidx.cardview.widget.CardView
             android:id="@+id/cvFoto"
             android:layout_width="64dp"
@@ -36,7 +36,7 @@
                 android:src="@drawable/cappuccino" />
         </androidx.cardview.widget.CardView>
 
-        <!-- Nama Makanan/Minuman -->
+        <!-- Food or beverage name -->
         <TextView
             android:id="@+id/tvMenuName"
             android:layout_width="0dp"
@@ -50,7 +50,7 @@
             app:layout_constraintStart_toEndOf="@+id/cvFoto"
             app:layout_constraintTop_toTopOf="@+id/cvFoto" />
 
-        <!-- Deskripsi Menu -->
+        <!-- Menu description -->
         <TextView
             android:id="@+id/tvMenuDesc"
             android:layout_width="0dp"
@@ -64,7 +64,7 @@
             app:layout_constraintStart_toEndOf="@+id/cvFoto"
             app:layout_constraintTop_toBottomOf="@+id/tvMenuName" />
 
-        <!-- Harga Menu -->
+        <!-- Menu item price -->
         <TextView
             android:id="@+id/tvMenuPrice"
             android:layout_width="0dp"

@@ -38,13 +38,13 @@ class HomeActivity : AppCompatActivity() {
         val btnNavOrder = findViewById<Button>(R.id.btnNavOrder)
         val btnNavProfile = findViewById<Button>(R.id.btnNavProfile)
 
-        // 1. Tangkap nama/username dari Login atau Register
+        // Retrieve the username from the Login or Register screen
         val username = intent.getStringExtra("USERNAME_KEY") ?: "Teman Ngopi"
         tvGreeting.text = "Halo $username,"
 
-        // 2. Siapkan 10 Data Statis lengkap dengan Kategori & Gambar
+        // Static menu data with categories and images
         val allMenuList = listOf(
-            // Kategori Minuman
+            // Beverage category
             MenuItem("Americano", "Espresso, air panas/dingin", "Rp 20.000", "Minuman", R.drawable.espresso),
             MenuItem("Kopi Susu Gula Aren", "Espresso, susu, gula aren", "Rp 22.000", "Minuman", R.drawable.kopsu_aren),
             MenuItem("Cappuccino", "Espresso, foam susu lembut", "Rp 25.000", "Minuman", R.drawable.cappuccino),
@@ -52,14 +52,14 @@ class HomeActivity : AppCompatActivity() {
             MenuItem("Lemon Tea", "Teh, lemon segar", "Rp 18.000", "Minuman", R.drawable.lemon_tea),
             MenuItem("Air Mineral", "Air minum kemasan", "Rp 10.000", "Minuman", R.drawable.water),
 
-            // Kategori Makanan
+            // Food category
             MenuItem("Donat Cokelat", "Donat empuk, glaze cokelat", "Rp 12.000", "Makanan", R.drawable.donut),
             MenuItem("Croissant", "Croissant mentega renyah", "Rp 15.000", "Makanan", R.drawable.croissant),
             MenuItem("French Fries", "Kentang goreng gurih", "Rp 20.000", "Makanan", R.drawable.fries),
             MenuItem("Chicken Wings", "Wings empuk, saus BBQ panggang", "Rp 35.000", "Makanan", R.drawable.wings)
         )
 
-        // 3. Pasang Adapter ke RecyclerView
+        // Attach the adapter to the RecyclerView
         val menuAdapter = MenuAdapter(allMenuList) { selectedItem ->
             Toast.makeText(this, "Memilih: ${selectedItem.name}", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, OrderAddressActivity::class.java)
@@ -69,14 +69,14 @@ class HomeActivity : AppCompatActivity() {
         rvMenu.layoutManager = LinearLayoutManager(this)
         rvMenu.adapter = menuAdapter
 
-        // Fungsi pembantu untuk mengubah gaya tombol Tab yang sedang aktif
+        // Helper function to update the active tab button style
         fun setActiveTab(activeBtn: MaterialButton, inactiveBtn1: MaterialButton, inactiveBtn2: MaterialButton) {
-            // Gaya tombol aktif (Hitam solid, teks putih)
+            // Active tab style (solid black background, white text)
             activeBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.btn_dark))
             activeBtn.setTextColor(ContextCompat.getColor(this, R.color.bg_primary))
             activeBtn.strokeWidth = 0
 
-            // Gaya tombol tidak aktif (Krem kartu, teks hitam, border tipis)
+            // Inactive tab style (cream background, black text, thin border)
             val inactiveBg = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.surface_card))
             val inactiveText = ContextCompat.getColor(this, R.color.text_primary)
             val borderStroke = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.border_light))
@@ -89,7 +89,7 @@ class HomeActivity : AppCompatActivity() {
             }
         }
 
-        // 4. Aksi Klik Filter Tab
+        // Handle filter tab click events
         btnTabAll.setOnClickListener {
             setActiveTab(btnTabAll, btnTabDrinks, btnTabFood)
             menuAdapter.updateList(allMenuList)
@@ -107,7 +107,7 @@ class HomeActivity : AppCompatActivity() {
             menuAdapter.updateList(foodOnly)
         }
 
-        // 5. Navigasi Tombol Bawah
+        // Bottom navigation actions
         btnNavOrder.setOnClickListener {
             val intent = Intent(this, OrderAddressActivity::class.java)
             intent.putExtra("USERNAME_KEY", username)

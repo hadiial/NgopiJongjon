@@ -8,7 +8,7 @@
     android:background="@color/bg_primary"
     tools:context=".HomeActivity">
 
-    <!-- Sapaan Halo Nama -->
+    <!-- Personalized greeting header -->
     <TextView
         android:id="@+id/tvGreeting"
         android:layout_width="0dp"
@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Baris Filter Tab (Semua | Minuman | Makanan) -->
+    <!-- Menu category filter tabs -->
     <LinearLayout
         android:id="@+id/llFilterTabs"
         android:layout_width="0dp"
@@ -89,7 +89,7 @@
             app:strokeWidth="1dp" />
     </LinearLayout>
 
-    <!-- Daftar Menu (RecyclerView di bawah Filter Tab) -->
+    <!-- Displayed menu items list -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMenu"
         android:layout_width="0dp"
@@ -104,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/llFilterTabs"
         tools:listitem="@layout/item_menu" />
 
-    <!-- Baris Navigasi Bawah -->
+    <!-- Bottom Navigation Bar -->
     <LinearLayout
         android:id="@+id/llBottomNav"
         android:layout_width="0dp"

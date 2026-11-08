@@ -46,7 +46,7 @@ class MenuAdapter(
 
     override fun getItemCount(): Int = menuList.size
 
-    // Fungsi untuk memperbarui data saat Filter Tab diklik
+    // Refresh data when a filter tab is clicked
     fun updateList(newList: List<MenuItem>) {
         menuList = newList
         notifyDataSetChanged()
