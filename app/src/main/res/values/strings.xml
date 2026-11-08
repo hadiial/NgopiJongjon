@@ -50,6 +50,8 @@
     <string name="nav_order">Order</string>
     <string name="nav_profile">Profile</string>
     <string name="menu_bullet_format">• %1$s</string>
+    <string name="home_sub_greeting">Mau ngopi santai apa hari ini?</string>
+    <string name="btn_add_to_cart">+</string>
 
     <!-- Toasts messages -->
     <string name="toast_empty_username_password">Username dan Password tidak boleh kosong!</string>
