@@ -29,7 +29,7 @@
     <string name="btn_order_send">Order dan Kirim</string>
 
     <!-- Order Success Page -->
-    <string name="status_ok">OK</string>
+    <string name="status_ok">Order Sukses!</string>
     <string name="order_success_msg">Terima kasih sudah memesan\ntunggu aja sebentar kurir kami\nsegera mengantarkan\npesananmu!</string>
     <string name="btn_oke">Oke</string>
 
