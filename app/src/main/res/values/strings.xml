@@ -60,6 +60,10 @@
     <string name="home_sub_greeting">Mau ngopi santai apa hari ini?</string>
     <string name="btn_add_to_cart">+</string>
 
+    <!-- Exit App Confirmation Dialog -->
+    <string name="dialog_exit_title">Keluar Aplikasi</string>
+    <string name="dialog_exit_message">Apakah kamu yakin ingin keluar dari aplikasi NgopiJongjon?</string>
+
     <!-- Toasts messages -->
     <string name="toast_empty_username_password">Username dan Password tidak boleh kosong!</string>
     <string name="toast_login_success">Login berhasil!</string>

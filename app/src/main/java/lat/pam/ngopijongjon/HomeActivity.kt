@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -29,6 +31,20 @@ class HomeActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        // Show an exit confirmation dialog when the Back button is pressed
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                AlertDialog.Builder(this@HomeActivity)
+                    .setTitle(getString(R.string.dialog_exit_title))
+                    .setMessage(getString(R.string.dialog_exit_message))
+                    .setPositiveButton(getString(R.string.dialog_yes)) { _, _ ->
+                        finishAffinity()
+                    }
+                    .setNegativeButton(getString(R.string.dialog_no), null)
+                    .show()
+            }
+        })
 
         val tvGreeting = findViewById<TextView>(R.id.tvGreeting)
         val rvMenu = findViewById<RecyclerView>(R.id.rvMenu)
