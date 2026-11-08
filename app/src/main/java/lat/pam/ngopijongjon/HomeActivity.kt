@@ -1,25 +1,35 @@
 package lat.pam.ngopijongjon
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.button.MaterialButton
+
+import android.util.Log
 
 class HomeActivity : AppCompatActivity() {
+    private val TAG = "HomeActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate: Activity started")
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
 
-        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = true
+        WindowInsetsControllerCompat(window, window.decorView).isAppearanceLightStatusBars = false
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -27,45 +37,140 @@ class HomeActivity : AppCompatActivity() {
             insets
         }
 
+        // Show an exit confirmation dialog when the Back button is pressed
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                Log.d(TAG, "onBackPressed: Showing exit confirmation dialog")
+                AlertDialog.Builder(this@HomeActivity)
+                    .setTitle(getString(R.string.dialog_exit_title))
+                    .setMessage(getString(R.string.dialog_exit_message))
+                    .setPositiveButton(getString(R.string.dialog_yes)) { _, _ ->
+                        Log.i(TAG, "onBackPressed: User confirmed exit")
+                        finishAffinity()
+                    }
+                    .setNegativeButton(getString(R.string.dialog_no)) { _, _ ->
+                        Log.d(TAG, "onBackPressed: User cancelled exit")
+                    }
+                    .show()
+            }
+        })
+
         val tvGreeting = findViewById<TextView>(R.id.tvGreeting)
         val rvMenu = findViewById<RecyclerView>(R.id.rvMenu)
+        val btnTabAll = findViewById<MaterialButton>(R.id.btnTabAll)
+        val btnTabDrinks = findViewById<MaterialButton>(R.id.btnTabDrinks)
+        val btnTabFood = findViewById<MaterialButton>(R.id.btnTabFood)
         val btnNavOrder = findViewById<Button>(R.id.btnNavOrder)
         val btnNavProfile = findViewById<Button>(R.id.btnNavProfile)
 
-        // 1. Tangkap nama/username dari Login atau Register (jika ada)
-        val username = intent.getStringExtra("USERNAME_KEY") ?: "Teman Ngopi"
-        tvGreeting.text = "Halo $username,"
+        // Retrieve the username from the Login or Register screen
+        val username = intent.getStringExtra("USERNAME_KEY") ?: getString(R.string.default_username)
+        tvGreeting.text = getString(R.string.greeting_format, username)
 
-        // 2. Siapkan 5 Data Statis (Dummy Data) sesuai Wireframe
-        val dummyMenuList = listOf(
-            MenuItem("Kopi Susu Gula Aren", "Espresso, susu, gula aren", "Rp 22.000"),
-            MenuItem("Donat Cokelat", "Donat empuk, glaze cokelat", "Rp 12.000"),
-            MenuItem("Sourdough Loaf", "Roti fermentasi alami", "Rp 35.000"),
-            MenuItem("Cappuccino", "Espresso, foam susu lembut", "Rp 25.000"),
-            MenuItem("Matcha Latte", "Matcha jepang, susu segar", "Rp 27.000")
+        // Static menu data with categories and images
+        val allMenuList = listOf(
+            // Beverage category
+            MenuItem("Americano", "Espresso, air panas/dingin", "Rp 20.000", "Minuman", R.drawable.espresso),
+            MenuItem("Kopi Susu Gula Aren", "Espresso, susu, gula aren", "Rp 22.000", "Minuman", R.drawable.kopsu_aren),
+            MenuItem("Cappuccino", "Espresso, foam susu lembut", "Rp 25.000", "Minuman", R.drawable.cappuccino),
+            MenuItem("Matcha Latte", "Matcha jepang, susu segar", "Rp 27.000", "Minuman", R.drawable.matcha),
+            MenuItem("Lemon Tea", "Teh, lemon segar", "Rp 18.000", "Minuman", R.drawable.lemon_tea),
+            MenuItem("Air Mineral", "Air minum kemasan", "Rp 10.000", "Minuman", R.drawable.water),
+
+            // Food category
+            MenuItem("Donat Cokelat", "Donat empuk, glaze cokelat", "Rp 12.000", "Makanan", R.drawable.donut),
+            MenuItem("Croissant", "Croissant mentega renyah", "Rp 15.000", "Makanan", R.drawable.croissant),
+            MenuItem("French Fries", "Kentang goreng gurih", "Rp 20.000", "Makanan", R.drawable.fries),
+            MenuItem("Chicken Wings", "Wings empuk, saus BBQ panggang", "Rp 35.000", "Makanan", R.drawable.wings)
         )
 
-        // 3. Pasang Adapter ke RecyclerView
+        // Attach the adapter to the RecyclerView and show a toast message when an item is clicked
+        val menuAdapter = MenuAdapter(allMenuList) { selectedItem ->
+            Log.d(TAG, "Menu item clicked: ${selectedItem.name}")
+            Toast.makeText(this, getString(R.string.toast_memilih, selectedItem.name), Toast.LENGTH_SHORT).show()
+        }
         rvMenu.layoutManager = LinearLayoutManager(this)
-        rvMenu.adapter = MenuAdapter(dummyMenuList) { selectedItem ->
-            Toast.makeText(this, "Memilih: ${selectedItem.name}", Toast.LENGTH_SHORT).show()
-            // Opsional: Langsung pindah ke halaman Order saat item diklik
-            val intent = Intent(this, OrderAddressActivity::class.java)
-            intent.putExtra("USERNAME_KEY", username)
-            startActivity(intent)
+        rvMenu.adapter = menuAdapter
+
+        // Helper function to update the active tab button style
+        fun setActiveTab(activeBtn: MaterialButton, inactiveBtn1: MaterialButton, inactiveBtn2: MaterialButton) {
+            // Active tab style (solid dark background, light text)
+            activeBtn.backgroundTintList = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.btn_dark))
+            activeBtn.setTextColor(ContextCompat.getColor(this, R.color.bg_primary))
+            activeBtn.strokeWidth = 0
+
+            // Inactive tab style (card surface background, primary text, thin border)
+            val inactiveBg = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.surface_card))
+            val inactiveText = ContextCompat.getColor(this, R.color.text_primary)
+            val borderStroke = ColorStateList.valueOf(ContextCompat.getColor(this, R.color.border_light))
+
+            listOf(inactiveBtn1, inactiveBtn2).forEach { btn ->
+                btn.backgroundTintList = inactiveBg
+                btn.setTextColor(inactiveText)
+                btn.strokeColor = borderStroke
+                btn.strokeWidth = 3
+            }
         }
 
-        // 4. Navigasi Tombol Bawah
+        // Handle filter tab click events
+        btnTabAll.setOnClickListener {
+            Log.d(TAG, "btnTabAll clicked: Showing all menu items")
+            setActiveTab(btnTabAll, btnTabDrinks, btnTabFood)
+            menuAdapter.updateList(allMenuList)
+        }
+
+        btnTabDrinks.setOnClickListener {
+            Log.d(TAG, "btnTabDrinks clicked: Filtering for drinks only")
+            setActiveTab(btnTabDrinks, btnTabAll, btnTabFood)
+            val drinksOnly = allMenuList.filter { it.category == "Minuman" }
+            menuAdapter.updateList(drinksOnly)
+        }
+
+        btnTabFood.setOnClickListener {
+            Log.d(TAG, "btnTabFood clicked: Filtering for food only")
+            setActiveTab(btnTabFood, btnTabAll, btnTabDrinks)
+            val foodOnly = allMenuList.filter { it.category == "Makanan" }
+            menuAdapter.updateList(foodOnly)
+        }
+
+        // Bottom navigation actions
         btnNavOrder.setOnClickListener {
+            Log.d(TAG, "btnNavOrder clicked: Navigating to OrderAddressActivity")
             val intent = Intent(this, OrderAddressActivity::class.java)
             intent.putExtra("USERNAME_KEY", username)
             startActivity(intent)
         }
 
         btnNavProfile.setOnClickListener {
+            Log.d(TAG, "btnNavProfile clicked: Navigating to ProfileActivity")
             val intent = Intent(this, ProfileActivity::class.java)
             intent.putExtra("USERNAME_KEY", username)
             startActivity(intent)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.v(TAG, "onStart: Activity visible")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.v(TAG, "onResume: Activity in foreground")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.v(TAG, "onPause: Activity losing focus")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.v(TAG, "onStop: Activity no longer visible")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: Activity destroyed")
     }
 }

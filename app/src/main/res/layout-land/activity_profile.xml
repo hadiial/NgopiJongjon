@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_auth"
+    tools:context=".ProfileActivity">
+
+    <!-- Place the vertical guideline along the curve at 38% of the screen width -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.38" />
+
+    <!-- Place the logo on the left espresso section -->
+    <ImageView
+        android:id="@+id/ivHeaderLogo"
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:contentDescription="@string/placeholder_logo"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon"
+        app:layout_constraintBottom_toTopOf="@+id/tvProfileGreeting"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <!-- Personalized greeting header below the logo -->
+    <TextView
+        android:id="@+id/tvProfileGreeting"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:textColor="#E8CFAF"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/cvBottomNavProfile"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ivHeaderLogo"
+        tools:text="@string/greeting_format" />
+
+    <!-- Side Navigation (Drawer style) on the left espresso section -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvBottomNavProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="20dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardElevation="0dp"
+        app:strokeWidth="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineHeader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProfileGreeting">
+
+        <LinearLayout
+            android:id="@+id/llBottomNavProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Home Tab (Inactive on espresso background with outline) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNavHome"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="10dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/nav_home"
+                android:textAllCaps="false"
+                android:textColor="#E8CFAF"
+                android:textSize="14sp"
+                app:backgroundTint="@android:color/transparent"
+                app:cornerRadius="12dp"
+                app:strokeColor="#E8CFAF"
+                app:strokeWidth="1dp" />
+
+            <!-- Order Tab (Inactive on espresso background with outline) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNavOrder"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginBottom="10dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/nav_order"
+                android:textAllCaps="false"
+                android:textColor="#E8CFAF"
+                android:textSize="14sp"
+                app:backgroundTint="@android:color/transparent"
+                app:cornerRadius="12dp"
+                app:strokeColor="#E8CFAF"
+                app:strokeWidth="1dp" />
+
+            <!-- Profile Tab (Active reverse color) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnNavProfile"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:backgroundTint="#E8CFAF"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/nav_profile"
+                android:textAllCaps="false"
+                android:textColor="#1C0B03"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Scrollable container on the right white section for profile form and buttons -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/guidelineHeader"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="36dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp">
+
+            <!-- My profile subtitle -->
+            <TextView
+                android:id="@+id/tvSubTitleProfile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/subtitle_my_profile"
+                android:textColor="@color/text_primary"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Profile setting label -->
+            <TextView
+                android:id="@+id/tvLabelSetting"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/label_profile_setting"
+                android:textColor="@color/text_secondary"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSubTitleProfile" />
+
+            <!-- Name input layout -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilProfileName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/hint_profile_name"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxStrokeColor="@color/btn_dark"
+                app:hintTextColor="@color/text_secondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvLabelSetting">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProfileName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    android:textColor="@color/text_primary"
+                    android:textSize="15sp" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Save button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnSaveProfile"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="24dp"
+                android:backgroundTint="@color/btn_dark"
+                android:text="@string/btn_save"
+                android:textAllCaps="false"
+                android:textColor="@color/bg_primary"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:cornerRadius="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tilProfileName" />
+
+            <!-- Logout button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnLogout"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_marginTop="12dp"
+                android:text="@string/btn_logout"
+                android:textAllCaps="false"
+                android:textColor="#D32F2F"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@android:color/transparent"
+                app:cornerRadius="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnSaveProfile"
+                app:strokeColor="#D32F2F"
+                app:strokeWidth="1.5dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

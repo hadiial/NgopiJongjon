@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
     app:cardBackgroundColor="@color/surface_card"
-    app:cardCornerRadius="12dp"
+    app:cardCornerRadius="16dp"
     app:cardElevation="0dp"
     app:strokeColor="@color/border_light"
     app:strokeWidth="1dp">
@@ -15,70 +16,98 @@
         android:layout_height="wrap_content"
         android:padding="12dp">
 
-        <!-- Kotak Placeholder Foto -->
-        <androidx.cardview.widget.CardView
+        <!-- Menu image container -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/cvFoto"
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
             app:cardBackgroundColor="@color/accent_coffee"
-            app:cardCornerRadius="8dp"
+            app:cardCornerRadius="12dp"
             app:cardElevation="0dp"
+            app:strokeColor="#221C0B03"
+            app:strokeWidth="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Foto"
-                android:textColor="@color/text_primary"
-                android:textSize="12sp"
-                android:textStyle="bold" />
-        </androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/ivMenuFoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop"
+                android:src="@drawable/cappuccino" />
+        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Nama Makanan/Minuman -->
+        <!-- Food or beverage name -->
         <TextView
             android:id="@+id/tvMenuName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="Kopi Susu Gula Aren"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@color/text_primary"
-            android:textSize="15sp"
+            android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cvAddBadge"
             app:layout_constraintStart_toEndOf="@+id/cvFoto"
-            app:layout_constraintTop_toTopOf="@+id/cvFoto" />
+            app:layout_constraintTop_toTopOf="@+id/cvFoto"
+            tools:text="Menu Name" />
 
-        <!-- Deskripsi Menu -->
+        <!-- Menu description -->
         <TextView
             android:id="@+id/tvMenuDesc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="14dp"
             android:layout_marginTop="2dp"
-            android:text="• Espresso, susu, gula aren"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="1"
             android:textColor="@color/text_secondary"
             android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/cvAddBadge"
             app:layout_constraintStart_toEndOf="@+id/cvFoto"
-            app:layout_constraintTop_toBottomOf="@+id/tvMenuName" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMenuName"
+            tools:text="Menu Description" />
 
-        <!-- Harga Menu -->
+        <!-- Menu item price -->
         <TextView
             android:id="@+id/tvMenuPrice"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="2dp"
-            android:text="• Rp 22.000"
-            android:textColor="@color/text_primary"
-            android:textSize="13sp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="#1C0B03"
+            android:textSize="14sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/cvFoto"
+            app:layout_constraintEnd_toStartOf="@+id/cvAddBadge"
             app:layout_constraintStart_toEndOf="@+id/cvFoto"
-            app:layout_constraintTop_toBottomOf="@+id/tvMenuDesc" />
+            app:layout_constraintTop_toBottomOf="@+id/tvMenuDesc"
+            tools:text="Rp 0" />
+
+        <!-- Add to cart action badge -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cvAddBadge"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            app:cardBackgroundColor="#1C0B03"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/btn_add_to_cart"
+                android:textColor="#E8CFAF"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

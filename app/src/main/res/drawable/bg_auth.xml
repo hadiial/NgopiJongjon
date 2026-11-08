@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="800dp"
+    android:viewportWidth="360"
+    android:viewportHeight="800">
+
+    <!-- Base background: solid white -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M0,0h360v800h-360z" />
+
+    <!-- Top section: espresso color -->
+    <path
+        android:fillColor="#1C0B03"
+        android:pathData="M0,0 L360,0 L360,160 C240,195 120,125 0,160 Z" />
+
+    <!-- Accent line: cream color following the curve -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M0,160 C120,125 240,195 360,160"
+        android:strokeWidth="3"
+        android:strokeColor="#E8CFAF" />
+
+</vector>

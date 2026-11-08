@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="800dp"
+    android:height="360dp"
+    android:viewportWidth="800"
+    android:viewportHeight="360">
+
+    <!-- Base background: solid white on the right side -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M0,0h800v360h-800z" />
+
+    <!-- Left section: espresso color with vertical S-curve at X=400 (50% width) -->
+    <path
+        android:fillColor="#1C0B03"
+        android:pathData="M0,0 L400,0 C450,120 350,240 400,360 L0,360 Z" />
+
+    <!-- Accent line: cream color following the vertical curve -->
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M400,0 C450,120 350,240 400,360"
+        android:strokeWidth="3"
+        android:strokeColor="#E8CFAF" />
+
+</vector>

@@ -5,57 +5,85 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg_primary"
+    android:background="@drawable/bg_auth"
     tools:context=".OrderSuccessActivity">
 
-    <!-- Sapaan Halo Nama di Bagian Atas -->
+    <!-- Position the guideline at the header curve location (20% from the top of the screen) -->
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHeader"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.20" />
+
+    <!-- Personalized greeting header -->
     <TextView
         android:id="@+id/tvSuccessGreeting"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="24dp"
-        android:layout_marginTop="48dp"
-        android:text="Halo User,"
-        android:textColor="@color/text_primary"
-        android:textSize="28sp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="#E8CFAF"
+        android:textSize="26sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineHeader"
+        app:layout_constraintEnd_toStartOf="@+id/ivHeaderLogo"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.55"
+        tools:text="@string/greeting_format" />
 
-    <!-- Lingkaran Hijau Status OK -->
-    <androidx.cardview.widget.CardView
+    <!-- Display the logo beside the greeting text -->
+    <ImageView
+        android:id="@+id/ivHeaderLogo"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="24dp"
+        android:contentDescription="@string/placeholder_logo"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon"
+        app:layout_constraintBottom_toBottomOf="@+id/tvSuccessGreeting"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tvSuccessGreeting" />
+
+    <!-- Green pill status badge -->
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cvStatusOk"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:cardBackgroundColor="@color/status_success_bg"
-        app:cardCornerRadius="65dp"
+        app:cardCornerRadius="36dp"
         app:cardElevation="0dp"
+        app:strokeColor="#332E7D32"
+        app:strokeWidth="2dp"
         app:layout_constraintBottom_toTopOf="@+id/tvOrderMessage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSuccessGreeting"
+        app:layout_constraintTop_toBottomOf="@+id/guidelineHeader"
+        app:layout_constraintVertical_bias="0.45"
         app:layout_constraintVertical_chainStyle="packed">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:paddingHorizontal="32dp"
+            android:paddingVertical="16dp"
             android:text="@string/status_ok"
             android:textColor="@color/status_success_text"
-            android:textSize="24sp"
+            android:textSize="22sp"
             android:textStyle="bold" />
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-    <!-- Pesan Terima Kasih -->
+    <!-- Order confirmation thank you message -->
     <TextView
         android:id="@+id/tvOrderMessage"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
+        android:layout_marginHorizontal="36dp"
         android:layout_marginTop="28dp"
         android:gravity="center"
-        android:lineSpacingExtra="4dp"
+        android:lineSpacingExtra="5dp"
         android:text="@string/order_success_msg"
         android:textColor="@color/text_secondary"
         android:textSize="15sp"
@@ -64,7 +92,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cvStatusOk" />
 
-    <!-- Tombol Oke di Bagian Bawah -->
+    <!-- Confirmation button at the bottom -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnOke"
         android:layout_width="0dp"

@@ -22,20 +22,56 @@
     <string name="register_desc">Mohon isi formulir berikut untuk bergabung</string>
 
     <!-- Order Address Page -->
-    <string name="title_address">Alamat</string>
+    <string name="title_address">Alamat Pengiriman</string>
     <string name="hint_full_name">Nama Lengkap</string>
     <string name="hint_address">Alamat</string>
     <string name="hint_address_detail">Patokan atau detail lengkap</string>
     <string name="btn_order_send">Order dan Kirim</string>
 
     <!-- Order Success Page -->
-    <string name="status_ok">OK</string>
-    <string name="order_success_msg">Terima kasih sudah memesan\ntunggu aja sebentar kurir kami\nsegera mengantarkan\npesananmu!</string>
+    <string name="status_ok">Order Sukses!</string>
+    <string name="order_success_msg">Terima kasih sudah memesan!\nTunggu aja sebentar, kurir kami segera mengantarkan pesananmu!</string>
     <string name="btn_oke">Oke</string>
 
     <!-- Profile Page -->
     <string name="subtitle_my_profile">Profile Saya</string>
-    <string name="label_profile_setting">Profile Setting</string>
+    <string name="label_profile_setting">Ganti nama Anda pada kolom di bawah</string>
     <string name="hint_profile_name">nama</string>
     <string name="btn_save">Save</string>
+
+    <!-- Profile & Logout Strings -->
+    <string name="btn_logout">Keluar Akun</string>
+    <string name="dialog_logout_title">Konfirmasi Keluar</string>
+    <string name="dialog_logout_message">Apakah kamu yakin ingin keluar dari akun ini?</string>
+    <string name="dialog_yes">Ya</string>
+    <string name="dialog_no">Batal</string>
+
+    <!-- Home Page -->
+    <string name="greeting_format">Halo %1$s,</string>
+    <string name="default_username">Teman Ngopi</string>
+    <string name="toast_memilih">Memilih: %1$s</string>
+    <string name="tab_semua">Semua</string>
+    <string name="tab_minuman">Minuman</string>
+    <string name="tab_makanan">Makanan</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_order">Order</string>
+    <string name="nav_profile">Profile</string>
+    <string name="menu_bullet_format">• %1$s</string>
+    <string name="home_sub_greeting">Mau ngopi santai apa hari ini?</string>
+    <string name="btn_add_to_cart">+</string>
+
+    <!-- Exit App Confirmation Dialog -->
+    <string name="dialog_exit_title">Keluar Aplikasi</string>
+    <string name="dialog_exit_message">Apakah kamu yakin ingin keluar dari aplikasi NgopiJongjon?</string>
+
+    <!-- Toasts messages -->
+    <string name="toast_empty_username_password">Username dan Password tidak boleh kosong!</string>
+    <string name="toast_login_success">Login berhasil!</string>
+    <string name="toast_invalid_credentials">Username atau Password salah!</string>
+    <string name="toast_empty_address">Harap lengkapi semua data alamat pengiriman!</string>
+    <string name="toast_order_processed">Pesanan diproses!</string>
+    <string name="toast_empty_name">Nama tidak boleh kosong!</string>
+    <string name="toast_profile_saved">Profil berhasil disimpan!</string>
+    <string name="toast_empty_form">Mohon untuk lengkapi formulir di atas!</string>
+    <string name="toast_register_success">Daftar berhasil! Silakan masuk untuk melanjutkan</string>
 </resources>
