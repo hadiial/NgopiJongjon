@@ -18,9 +18,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
 
+import android.util.Log
+
 class HomeActivity : AppCompatActivity() {
+    private val TAG = "HomeActivity"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate: Activity started")
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
 
@@ -35,13 +40,17 @@ class HomeActivity : AppCompatActivity() {
         // Show an exit confirmation dialog when the Back button is pressed
         onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
+                Log.d(TAG, "onBackPressed: Showing exit confirmation dialog")
                 AlertDialog.Builder(this@HomeActivity)
                     .setTitle(getString(R.string.dialog_exit_title))
                     .setMessage(getString(R.string.dialog_exit_message))
                     .setPositiveButton(getString(R.string.dialog_yes)) { _, _ ->
+                        Log.i(TAG, "onBackPressed: User confirmed exit")
                         finishAffinity()
                     }
-                    .setNegativeButton(getString(R.string.dialog_no), null)
+                    .setNegativeButton(getString(R.string.dialog_no)) { _, _ ->
+                        Log.d(TAG, "onBackPressed: User cancelled exit")
+                    }
                     .show()
             }
         })
@@ -77,6 +86,7 @@ class HomeActivity : AppCompatActivity() {
 
         // Attach the adapter to the RecyclerView and show a toast message when an item is clicked
         val menuAdapter = MenuAdapter(allMenuList) { selectedItem ->
+            Log.d(TAG, "Menu item clicked: ${selectedItem.name}")
             Toast.makeText(this, getString(R.string.toast_memilih, selectedItem.name), Toast.LENGTH_SHORT).show()
         }
         rvMenu.layoutManager = LinearLayoutManager(this)
@@ -104,17 +114,20 @@ class HomeActivity : AppCompatActivity() {
 
         // Handle filter tab click events
         btnTabAll.setOnClickListener {
+            Log.d(TAG, "btnTabAll clicked: Showing all menu items")
             setActiveTab(btnTabAll, btnTabDrinks, btnTabFood)
             menuAdapter.updateList(allMenuList)
         }
 
         btnTabDrinks.setOnClickListener {
+            Log.d(TAG, "btnTabDrinks clicked: Filtering for drinks only")
             setActiveTab(btnTabDrinks, btnTabAll, btnTabFood)
             val drinksOnly = allMenuList.filter { it.category == "Minuman" }
             menuAdapter.updateList(drinksOnly)
         }
 
         btnTabFood.setOnClickListener {
+            Log.d(TAG, "btnTabFood clicked: Filtering for food only")
             setActiveTab(btnTabFood, btnTabAll, btnTabDrinks)
             val foodOnly = allMenuList.filter { it.category == "Makanan" }
             menuAdapter.updateList(foodOnly)
@@ -122,15 +135,42 @@ class HomeActivity : AppCompatActivity() {
 
         // Bottom navigation actions
         btnNavOrder.setOnClickListener {
+            Log.d(TAG, "btnNavOrder clicked: Navigating to OrderAddressActivity")
             val intent = Intent(this, OrderAddressActivity::class.java)
             intent.putExtra("USERNAME_KEY", username)
             startActivity(intent)
         }
 
         btnNavProfile.setOnClickListener {
+            Log.d(TAG, "btnNavProfile clicked: Navigating to ProfileActivity")
             val intent = Intent(this, ProfileActivity::class.java)
             intent.putExtra("USERNAME_KEY", username)
             startActivity(intent)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.v(TAG, "onStart: Activity visible")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.v(TAG, "onResume: Activity in foreground")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.v(TAG, "onPause: Activity losing focus")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.v(TAG, "onStop: Activity no longer visible")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy: Activity destroyed")
     }
 }

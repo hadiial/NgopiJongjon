@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
@@ -12,6 +13,10 @@ class MenuAdapter(
     private var menuList: List<MenuItem>,
     private val onItemClick: (MenuItem) -> Unit
 ) : RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+
+    companion object {
+        private const val TAG = "MenuAdapter"
+    }
 
     class MenuViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val ivMenuFoto: ImageView = itemView.findViewById(R.id.ivMenuFoto)
@@ -40,6 +45,7 @@ class MenuAdapter(
         holder.tvMenuPrice.text = holder.itemView.context.getString(R.string.menu_bullet_format, item.price)
 
         holder.itemView.setOnClickListener {
+            Log.d(TAG, "Menu item clicked: ${item.name}")
             onItemClick(item)
         }
     }
@@ -48,6 +54,7 @@ class MenuAdapter(
 
     // Refresh data when a filter tab is clicked
     fun updateList(newList: List<MenuItem>) {
+        Log.d(TAG, "updateList called: Refreshing data with ${newList.size} items")
         menuList = newList
         notifyDataSetChanged()
     }
