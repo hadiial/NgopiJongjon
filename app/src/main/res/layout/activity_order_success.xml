@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="48dp"
-        android:text="Halo User,"
+        tools:text="@string/greeting_format"
         android:textColor="@color/text_primary"
         android:textSize="28sp"
         android:textStyle="bold"

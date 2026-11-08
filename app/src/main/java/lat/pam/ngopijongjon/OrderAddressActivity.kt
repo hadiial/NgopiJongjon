@@ -43,9 +43,9 @@ class OrderAddressActivity : AppCompatActivity() {
 
             // Validasi input tidak boleh kosong
             if (fullName.isEmpty() || address.isEmpty() || detail.isEmpty()) {
-                Toast.makeText(this, "Harap lengkapi semua data alamat pengiriman!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toast_empty_address), Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(this, "Pesanan diproses!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toast_order_processed), Toast.LENGTH_SHORT).show()
 
                 // Arahkan ke halaman 8 (OrderSuccessActivity) sambil mengirim nama pemesan
                 // val intent = Intent(this, OrderSuccessActivity::class.java)

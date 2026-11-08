@@ -36,8 +36,8 @@ class MenuAdapter(
             .into(holder.ivMenuFoto)
             
         holder.tvMenuName.text = item.name
-        holder.tvMenuDesc.text = "• ${item.description}"
-        holder.tvMenuPrice.text = "• ${item.price}"
+        holder.tvMenuDesc.text = holder.itemView.context.getString(R.string.menu_bullet_format, item.description)
+        holder.tvMenuPrice.text = holder.itemView.context.getString(R.string.menu_bullet_format, item.price)
 
         holder.itemView.setOnClickListener {
             onItemClick(item)

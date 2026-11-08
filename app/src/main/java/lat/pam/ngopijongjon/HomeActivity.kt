@@ -39,8 +39,8 @@ class HomeActivity : AppCompatActivity() {
         val btnNavProfile = findViewById<Button>(R.id.btnNavProfile)
 
         // Retrieve the username from the Login or Register screen
-        val username = intent.getStringExtra("USERNAME_KEY") ?: "Teman Ngopi"
-        tvGreeting.text = "Halo $username,"
+        val username = intent.getStringExtra("USERNAME_KEY") ?: getString(R.string.default_username)
+        tvGreeting.text = getString(R.string.greeting_format, username)
 
         // Static menu data with categories and images
         val allMenuList = listOf(
@@ -61,7 +61,7 @@ class HomeActivity : AppCompatActivity() {
 
         // Attach the adapter to the RecyclerView
         val menuAdapter = MenuAdapter(allMenuList) { selectedItem ->
-            Toast.makeText(this, "Memilih: ${selectedItem.name}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.toast_memilih, selectedItem.name), Toast.LENGTH_SHORT).show()
             val intent = Intent(this, OrderAddressActivity::class.java)
             intent.putExtra("USERNAME_KEY", username)
             startActivity(intent)

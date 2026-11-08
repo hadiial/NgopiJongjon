@@ -28,8 +28,8 @@ class OrderSuccessActivity : AppCompatActivity() {
         val btnOke = findViewById<Button>(R.id.btnOke)
 
         // Tangkap nama pemesan dari OrderAddressActivity
-        val username = intent.getStringExtra("USERNAME_KEY") ?: "Teman Ngopi"
-        tvSuccessGreeting.text = "Halo $username,"
+        val username = intent.getStringExtra("USERNAME_KEY") ?: getString(R.string.default_username)
+        tvSuccessGreeting.text = getString(R.string.greeting_format, username)
 
         btnOke.setOnClickListener {
             // Kembali ke halaman Home dan bersihkan riwayat halaman order

@@ -38,4 +38,27 @@
     <string name="label_profile_setting">Profile Setting</string>
     <string name="hint_profile_name">nama</string>
     <string name="btn_save">Save</string>
+
+    <!-- Home Page -->
+    <string name="greeting_format">Halo %1$s,</string>
+    <string name="default_username">Teman Ngopi</string>
+    <string name="toast_memilih">Memilih: %1$s</string>
+    <string name="tab_semua">Semua</string>
+    <string name="tab_minuman">Minuman</string>
+    <string name="tab_makanan">Makanan</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_order">Order</string>
+    <string name="nav_profile">Profile</string>
+    <string name="menu_bullet_format">• %1$s</string>
+
+    <!-- Toasts messages -->
+    <string name="toast_empty_username_password">Username dan Password tidak boleh kosong!</string>
+    <string name="toast_login_success">Login berhasil!</string>
+    <string name="toast_invalid_credentials">Username atau Password salah!</string>
+    <string name="toast_empty_address">Harap lengkapi semua data alamat pengiriman!</string>
+    <string name="toast_order_processed">Pesanan diproses!</string>
+    <string name="toast_empty_name">Nama tidak boleh kosong!</string>
+    <string name="toast_profile_saved">Profil berhasil disimpan!</string>
+    <string name="toast_empty_form">Mohon untuk lengkapi formulir di atas!</string>
+    <string name="toast_register_success">Daftar berhasil! Silakan masuk untuk melanjutkan</string>
 </resources>

@@ -36,11 +36,11 @@ class RegisterActivity : AppCompatActivity() {
 
             // Condition 1: Check for empty required fields
             if (fullname.isEmpty() || username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Mohon untuk lengkapi formulir di atas!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toast_empty_form), Toast.LENGTH_SHORT).show()
             }
             // Condition 2: Successfully registered
             else {
-                Toast.makeText(this, "Daftar berhasil! Silakan masuk untuk melanjutkan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toast_register_success), Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, LoginActivity::class.java)
                 startActivity(intent)
                 finish()

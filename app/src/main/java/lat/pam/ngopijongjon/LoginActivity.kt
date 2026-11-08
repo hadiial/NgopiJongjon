@@ -34,11 +34,11 @@ class LoginActivity : AppCompatActivity() {
 
             // Condition 1: Check for empty required fields
             if (username.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Username dan Password tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toast_empty_username_password), Toast.LENGTH_SHORT).show()
             }
             // Condition 2: Verify credential matching (username = user, password = user123)
             else if (username == "user" && password == "user123") {
-                Toast.makeText(this, "Login berhasil!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toast_login_success), Toast.LENGTH_SHORT).show()
                 val intent = Intent(this, HomeActivity::class.java)
                 intent.putExtra("USERNAME_KEY", username)
                 startActivity(intent)
@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
             }
             // Condition 3: Invalid credentials
             else {
-                Toast.makeText(this, "Username atau Password salah!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toast_invalid_credentials), Toast.LENGTH_SHORT).show()
             }
         }
     }

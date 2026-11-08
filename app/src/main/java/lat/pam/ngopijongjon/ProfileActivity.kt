@@ -33,19 +33,19 @@ class ProfileActivity : AppCompatActivity() {
         val btnNavOrder = findViewById<Button>(R.id.btnNavOrder)
 
         // Ambil nama saat ini dari Intent
-        var currentUsername = intent.getStringExtra("USERNAME_KEY") ?: "Teman Ngopi"
-        tvProfileGreeting.text = "Halo $currentUsername,"
+        var currentUsername = intent.getStringExtra("USERNAME_KEY") ?: getString(R.string.default_username)
+        tvProfileGreeting.text = getString(R.string.greeting_format, currentUsername)
         etProfileName.setText(currentUsername)
 
         // Aksi tombol Save untuk memperbarui nama statis
         btnSaveProfile.setOnClickListener {
             val newName = etProfileName.text.toString().trim()
             if (newName.isEmpty()) {
-                Toast.makeText(this, "Nama tidak boleh kosong!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.toast_empty_name), Toast.LENGTH_SHORT).show()
             } else {
                 currentUsername = newName
-                tvProfileGreeting.text = "Halo $currentUsername,"
-                Toast.makeText(this, "Profil berhasil disimpan!", Toast.LENGTH_SHORT).show()
+                tvProfileGreeting.text = getString(R.string.greeting_format, currentUsername)
+                Toast.makeText(this, getString(R.string.toast_profile_saved), Toast.LENGTH_SHORT).show()
             }
         }
 
