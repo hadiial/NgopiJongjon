@@ -35,9 +35,16 @@
 
     <!-- Profile Page -->
     <string name="subtitle_my_profile">Profile Saya</string>
-    <string name="label_profile_setting">Profile Setting</string>
+    <string name="label_profile_setting">Ganti nama Anda pada kolom di bawah</string>
     <string name="hint_profile_name">nama</string>
     <string name="btn_save">Save</string>
+
+    <!-- Profile & Logout Strings -->
+    <string name="btn_logout">Keluar Akun</string>
+    <string name="dialog_logout_title">Konfirmasi Keluar</string>
+    <string name="dialog_logout_message">Apakah kamu yakin ingin keluar dari akun ini?</string>
+    <string name="dialog_yes">Ya</string>
+    <string name="dialog_no">Batal</string>
 
     <!-- Home Page -->
     <string name="greeting_format">Halo %1$s,</string>
@@ -50,6 +57,8 @@
     <string name="nav_order">Order</string>
     <string name="nav_profile">Profile</string>
     <string name="menu_bullet_format">• %1$s</string>
+    <string name="home_sub_greeting">Mau ngopi santai apa hari ini?</string>
+    <string name="btn_add_to_cart">+</string>
 
     <!-- Toasts messages -->
     <string name="toast_empty_username_password">Username dan Password tidak boleh kosong!</string>
